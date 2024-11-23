@@ -43,7 +43,7 @@ let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
     { name: 'Pudding Caramel', category: 'short-eats', price: 12, image: 'pudding_caramel.jpg', description: 'A creamy caramel pudding.', outOfStock: false },
     { name: 'Boiled Egg', category: 'short-eats', price: 5, image: 'boiled_egg.jpg', description: 'A simple and nutritious boiled egg.', outOfStock: false },
 { name: 'Coke Float', category: 'soft-drinks', price: 25, image: 'coke_float.jpg', description: 'A refreshing combination of Coca-Cola and vanilla ice cream.', outOfStock: false }
-]
+];
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -146,8 +146,8 @@ function loadMenuItems() {
                 <h3>${item.name}</h3>
                 <p>${item.description}</p>
                 <p>Price: MVR ${item.price}</p>
-                <button onclick="markOutOfStock(${index})">${item.outOfStock ? 'In Stock' : 'Out of Stock'}</button>
-                <button onclick="deleteItem(${index})">Delete</button>
+                <button class="btn" onclick="markOutOfStock(${index})">${item.outOfStock ? 'In Stock' : 'Out of Stock'}</button>
+                <button class="btn" onclick="deleteItem(${index})">Delete</button>
             </div>
         `;
         menuContainer.appendChild(menuItem);
