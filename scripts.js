@@ -1,5 +1,24 @@
-let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
-  { name: 'Lavazza Black Coffee', category: 'coffee', price: 15, image: 'lavazza_black_coffee.jpg', description: 'A strong and bold espresso base.', outOfStock: false },
+document.addEventListener('DOMContentLoaded', () => {
+    const storedMenuItems = localStorage.getItem('menuItems');
+    if (storedMenuItems) {
+        menuItems = JSON.parse(storedMenuItems);
+    }
+    filterMenu('all');
+    document.querySelectorAll('.tab-button').forEach(button => {
+        button.addEventListener('click', (event) => {
+            filterMenu(event.target.dataset.category);
+        });
+    });
+    document.getElementById('search-bar').addEventListener('input', (event) => {
+        searchMenu(event.target.value);
+    });
+
+    // Check for updates periodically
+    setInterval(checkForUpdates, 5000);
+});
+
+let menuItems = [
+      { name: 'Lavazza Black Coffee', category: 'coffee', price: 15, image: 'lavazza_black_coffee.jpg', description: 'A strong and bold espresso base.', outOfStock: false },
     { name: 'Lavazza Milk Coffee', category: 'coffee', price: 18, image: 'lavazza_milk_coffee.jpg', description: 'Espresso with smooth and creamy milk.', outOfStock: false },
     { name: 'Nescafe Black Coffee', category: 'coffee', price: 5, image: 'nescafe_black_coffee.jpg', description: 'A classic coffee option.', outOfStock: false },
     { name: 'Nescafe Milk Coffee', category: 'coffee', price: 10, image: 'nescafe_milk_coffee.jpg', description: 'A creamy and comforting coffee drink.', outOfStock: false },
@@ -43,26 +62,7 @@ let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
     { name: 'Pudding Caramel', category: 'short-eats', price: 12, image: 'pudding_caramel.jpg', description: 'A creamy caramel pudding.', outOfStock: false },
     { name: 'Boiled Egg', category: 'short-eats', price: 5, image: 'boiled_egg.jpg', description: 'A simple and nutritious boiled egg.', outOfStock: false },
 { name: 'Coke Float', category: 'soft-drinks', price: 25, image: 'coke_float.jpg', description: 'A refreshing combination of Coca-Cola and vanilla ice cream.', outOfStock: false }
-]
-
-document.addEventListener('DOMContentLoaded', () => {
-    const storedMenuItems = localStorage.getItem('menuItems');
-    if (storedMenuItems) {
-        menuItems = JSON.parse(storedMenuItems);
-    }
-    filterMenu('all');
-    document.querySelectorAll('.tab-button').forEach(button => {
-        button.addEventListener('click', (event) => {
-            filterMenu(event.target.dataset.category);
-        });
-    });
-    document.getElementById('search-bar').addEventListener('input', (event) => {
-        searchMenu(event.target.value);
-    });
-
-    // Check for updates periodically
-    setInterval(checkForUpdates, 5000);
-});
+];
 
 function filterMenu(category) {
     const filteredItems = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
