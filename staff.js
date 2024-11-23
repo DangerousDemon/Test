@@ -1,5 +1,5 @@
 let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
-      { name: 'Lavazza Black Coffee', category: 'coffee', price: 15, image: 'lavazza_black_coffee.jpg', description: 'A strong and bold espresso base.', outOfStock: false },
+  { name: 'Lavazza Black Coffee', category: 'coffee', price: 15, image: 'lavazza_black_coffee.jpg', description: 'A strong and bold espresso base.', outOfStock: false },
     { name: 'Lavazza Milk Coffee', category: 'coffee', price: 18, image: 'lavazza_milk_coffee.jpg', description: 'Espresso with smooth and creamy milk.', outOfStock: false },
     { name: 'Nescafe Black Coffee', category: 'coffee', price: 5, image: 'nescafe_black_coffee.jpg', description: 'A classic coffee option.', outOfStock: false },
     { name: 'Nescafe Milk Coffee', category: 'coffee', price: 10, image: 'nescafe_milk_coffee.jpg', description: 'A creamy and comforting coffee drink.', outOfStock: false },
@@ -44,13 +44,14 @@ let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
     { name: 'Boiled Egg', category: 'short-eats', price: 5, image: 'boiled_egg.jpg', description: 'A simple and nutritious boiled egg.', outOfStock: false },
 { name: 'Coke Float', category: 'soft-drinks', price: 25, image: 'coke_float.jpg', description: 'A refreshing combination of Coca-Cola and vanilla ice cream.', outOfStock: false }
 ]
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const staffDashboard = document.getElementById('staff-dashboard');
 
     const staffCredentials = {
         username: 'staff',
-        password: '123'
+        password: 'password123'
     };
 
     loginForm.addEventListener('submit', (event) => {
@@ -74,13 +75,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const category = document.getElementById('item-category').value;
         const price = document.getElementById('item-price').value;
         const description = document.getElementById('item-description').value;
-        const image = document.getElementById('item-image').value;
+        const imageInput = document.getElementById('item-image');
 
-        menuItems.push({ name, category, price, image, description, outOfStock: false });
-        updateCustomerMenu();
-        logChange(`Added item: ${name} (by ${staffCredentials.username})`);
-        alert('Item added successfully!');
-        loadMenuItems();
+        // Check if the item already exists
+        const itemExists = menuItems.some(item => item.name.toLowerCase() === name.toLowerCase());
+
+        if (itemExists) {
+            alert('Item already exists in the menu.');
+        } else if (imageInput.files && imageInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const image = e.target.result;
+                menuItems.push({ name, category, price, image, description, outOfStock: false });
+                updateCustomerMenu();
+                logChange(`Added item: ${name} (by ${staffCredentials.username})`);
+                alert('Item added successfully!');
+                loadMenuItems();
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        } else {
+            alert('Please upload an image for the item.');
+        }
     });
 
     loadChangeLog();
