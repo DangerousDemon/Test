@@ -154,3 +154,75 @@ section {
         width: calc(100% - 40px);
     }
 }
+
+/* Additional CSS for staff login and dashboard */
+
+.container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    display: block;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #777;
+}
+
+#staff-menu-items {
+    margin-top: 20px;
+}
+
+.menu-item .image-container {
+    text-align: center;
+}
+
+.menu-item img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.menu-item .menu-item-details {
+    text-align: left;
+}
