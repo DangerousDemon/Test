@@ -80,19 +80,12 @@ section {
     justify-content: center;
 }
 
-.menu-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 100%;
-}
-
 .menu-item {
     background-color: #1f1f1f;
     border: 1px solid #333;
     margin: 10px;
     padding: 10px;
-    width: calc(33.333% - 40px);
+    flex: 1 1 100%;
     box-sizing: border-box;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -226,10 +219,18 @@ h2 {
     margin-top: 10px;
 }
 
+.collapsed #form-section {
+    display: none;
+}
+
+.collapsed #toggle-collapse::after {
+    content: 'Expand';
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .menu-item {
-        width: calc(50% - 40px); /* 2 items per row */
+        flex: 1 1 45%;
     }
     .container {
         padding: 15px;
@@ -249,7 +250,7 @@ h2 {
 
 @media (max-width: 480px) {
     .menu-item {
-        width: calc(50% - 20px); /* 2 items per row */
+        flex: 1 1 100%;
     }
     .container {
         padding: 10px;
