@@ -145,13 +145,13 @@ section {
 
 @media (max-width: 768px) {
     .menu-item {
-        width: calc(50% - 40px); /* 2 items per row */
+        width: calc(50% - 40px);
     }
 }
 
 @media (max-width: 480px) {
     .menu-item {
-        width: calc(50% - 20px); /* 2 items per row */
+        width: calc(100% - 40px);
     }
 }
 
@@ -195,13 +195,6 @@ h2 {
     color: #e0e0e0;
 }
 
-.form-group input[type="file"] {
-    padding: 5px;
-    background-color: #333;
-    color: #e0e0e0;
-    cursor: pointer;
-}
-
 .btn {
     padding: 10px 20px;
     border: none;
@@ -210,7 +203,6 @@ h2 {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-top: 10px;
 }
 
 .btn:hover {
@@ -233,11 +225,6 @@ h2 {
 
 .menu-item .menu-item-details {
     text-align: left;
-}
-
-.menu-item .btn {
-    margin-right: 5px;
-    margin-top: 10px;
 }
 
 /* Responsive design for staff page */
