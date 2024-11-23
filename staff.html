@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Login - Shine Cafe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Shine Cafe Logo" id="logo">
+        <h1>Shine Cafe - Staff Login</h1>
+        <nav>
+            <a href="index.html">Customer Page</a>
+        </nav>
+    </header>
+
+    <section id="login">
+        <h2>Staff Login</h2>
+        <form id="login-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </section>
+
+    <section id="staff-dashboard" style="display: none;">
+        <h2>Staff Dashboard</h2>
+        <div>
+            <label for="item-name">Item Name:</label>
+            <input type="text" id="item-name">
+            <label for="item-category">Category:</label>
+            <select id="item-category">
+                <option value="coffee">Coffee</option>
+                <option value="tea">Tea</option>
+                <option value="soft-drinks">Soft Drinks</option>
+                <option value="water">Water</option>
+                <option value="energy-drinks">Energy Drinks</option>
+                <option value="ice-cream">Ice Cream</option>
+                <option value="cones">Cones</option>
+                <option value="short-eats">Short Eats</option>
+            </select>
+            <label for="item-price">Price:</label>
+            <input type="number" id="item-price">
+            <label for="item-description">Description:</label>
+            <input type="text" id="item-description">
+            <label for="item-image">Image URL:</label>
+            <input type="text" id="item-image">
+            <button id="add-item-button">Add Item</button>
+        </div>
+        <div id="staff-menu-items"></div>
+        <h2>Change Log</h2>
+        <div id="change-log"></div>
+    </section>
+
+    <script src="staff.js"></script>
+</body>
+</html>
