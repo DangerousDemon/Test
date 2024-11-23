@@ -32,40 +32,58 @@
 
     <section id="staff-dashboard" class="container" style="display: none;">
         <h2>Staff Dashboard</h2>
-        <button id="toggle-collapse" class="btn">Collapse</button>
-        <div id="form-section" class="form">
-            <div class="form-group">
-                <label for="item-name">Item Name:</label>
-                <input type="text" id="item-name">
-            </div>
-            <div class="form-group">
-                <label for="item-category">Category:</label>
-                <select id="item-category">
-                    <option value="coffee">Coffee</option>
-                    <option value="tea">Tea</option>
-                    <option value="soft-drinks">Soft Drinks</option>
-                    <option value="water">Water</option>
-                    <option value="energy-drinks">Energy Drinks</option>
-                    <option value="ice-cream">Ice Cream</option>
-                    <option value="cones">Cones</option>
-                    <option value="short-eats">Short Eats</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="item-price">Price:</label>
-                <input type="number" id="item-price">
-            </div>
-            <div class="form-group">
-                <label for="item-description">Description:</label>
-                <input type="text" id="item-description">
-            </div>
-            <div class="form-group">
-                <label for="item-image">Image:</label>
-                <input type="file" id="item-image" accept="image/*">
-            </div>
-            <button id="add-item-button" class="btn">Add Item</button>
+        <div class="tabs">
+            <button class="tab-button active" data-tab="add-item">Add Item</button>
+            <button class="tab-button" data-tab="modify-item">Modify Item</button>
+            <button class="tab-button" data-tab="make-out-of-stock">Make Out of Stock</button>
         </div>
-        <div id="staff-menu-items"></div>
+
+        <div id="add-item" class="tab-content">
+            <h3>Add Item</h3>
+            <div class="form">
+                <div class="form-group">
+                    <label for="item-name">Item Name:</label>
+                    <input type="text" id="item-name">
+                </div>
+                <div class="form-group">
+                    <label for="item-category">Category:</label>
+                    <select id="item-category">
+                        <option value="coffee">Coffee</option>
+                        <option value="tea">Tea</option>
+                        <option value="soft-drinks">Soft Drinks</option>
+                        <option value="water">Water</option>
+                        <option value="energy-drinks">Energy Drinks</option>
+                        <option value="ice-cream">Ice Cream</option>
+                        <option value="cones">Cones</option>
+                        <option value="short-eats">Short Eats</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="item-price">Price:</label>
+                    <input type="number" id="item-price">
+                </div>
+                <div class="form-group">
+                    <label for="item-description">Description:</label>
+                    <input type="text" id="item-description">
+                </div>
+                <div class="form-group">
+                    <label for="item-image">Image:</label>
+                    <input type="file" id="item-image" accept="image/*">
+                </div>
+                <button id="add-item-button" class="btn">Add Item</button>
+            </div>
+        </div>
+
+        <div id="modify-item" class="tab-content" style="display: none;">
+            <h3>Modify Item</h3>
+            <!-- Modify item form/content here -->
+        </div>
+
+        <div id="make-out-of-stock" class="tab-content" style="display: none;">
+            <h3>Make Out of Stock</h3>
+            <div id="staff-menu-items"></div>
+        </div>
+
         <h2>Change Log</h2>
         <div id="change-log"></div>
     </section>
