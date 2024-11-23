@@ -48,6 +48,7 @@ let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const staffDashboard = document.getElementById('staff-dashboard');
+    const toggleCollapseButton = document.getElementById('toggle-collapse');
 
     const staffCredentials = {
         username: 'staff',
@@ -67,6 +68,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             alert('Invalid username or password');
         }
+    });
+
+    toggleCollapseButton.addEventListener('click', () => {
+        staffDashboard.classList.toggle('collapsed');
+        toggleCollapseButton.textContent = staffDashboard.classList.contains('collapsed') ? 'Expand' : 'Collapse';
     });
 
     const addItemButton = document.getElementById('add-item-button');
