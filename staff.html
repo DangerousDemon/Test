@@ -15,40 +15,54 @@
         </nav>
     </header>
 
-    <section id="login">
+    <section id="login" class="container">
         <h2>Staff Login</h2>
-        <form id="login-form">
-            <label for="username">Username:</label>
-            <input type="text" id="username" required>
-            <label for="password">Password:</label>
-            <input type="password" id="password" required>
-            <button type="submit">Login</button>
+        <form id="login-form" class="form">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
         </form>
     </section>
 
-    <section id="staff-dashboard" style="display: none;">
+    <section id="staff-dashboard" class="container" style="display: none;">
         <h2>Staff Dashboard</h2>
-        <div>
-            <label for="item-name">Item Name:</label>
-            <input type="text" id="item-name">
-            <label for="item-category">Category:</label>
-            <select id="item-category">
-                <option value="coffee">Coffee</option>
-                <option value="tea">Tea</option>
-                <option value="soft-drinks">Soft Drinks</option>
-                <option value="water">Water</option>
-                <option value="energy-drinks">Energy Drinks</option>
-                <option value="ice-cream">Ice Cream</option>
-                <option value="cones">Cones</option>
-                <option value="short-eats">Short Eats</option>
-            </select>
-            <label for="item-price">Price:</label>
-            <input type="number" id="item-price">
-            <label for="item-description">Description:</label>
-            <input type="text" id="item-description">
-            <label for="item-image">Image:</label>
-            <input type="file" id="item-image" accept="image/*">
-            <button id="add-item-button">Add Item</button>
+        <div class="form">
+            <div class="form-group">
+                <label for="item-name">Item Name:</label>
+                <input type="text" id="item-name">
+            </div>
+            <div class="form-group">
+                <label for="item-category">Category:</label>
+                <select id="item-category">
+                    <option value="coffee">Coffee</option>
+                    <option value="tea">Tea</option>
+                    <option value="soft-drinks">Soft Drinks</option>
+                    <option value="water">Water</option>
+                    <option value="energy-drinks">Energy Drinks</option>
+                    <option value="ice-cream">Ice Cream</option>
+                    <option value="cones">Cones</option>
+                    <option value="short-eats">Short Eats</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="item-price">Price:</label>
+                <input type="number" id="item-price">
+            </div>
+            <div class="form-group">
+                <label for="item-description">Description:</label>
+                <input type="text" id="item-description">
+            </div>
+            <div class="form-group">
+                <label for="item-image">Image:</label>
+                <input type="file" id="item-image" accept="image/*">
+            </div>
+            <button id="add-item-button" class="btn">Add Item</button>
         </div>
         <div id="staff-menu-items"></div>
         <h2>Change Log</h2>
