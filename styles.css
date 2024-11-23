@@ -143,20 +143,6 @@ section {
     margin: 5px 0;
 }
 
-@media (max-width: 768px) {
-    .menu-item {
-        width: calc(50% - 40px);
-    }
-}
-
-@media (max-width: 480px) {
-    .menu-item {
-        width: calc(100% - 40px);
-    }
-}
-
-/* Additional CSS for staff login and dashboard */
-
 .container {
     padding: 20px;
     max-width: 600px;
@@ -195,6 +181,13 @@ h2 {
     color: #e0e0e0;
 }
 
+.form-group input[type="file"] {
+    padding: 5px;
+    background-color: #333;
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
 .btn {
     padding: 10px 20px;
     border: none;
@@ -203,6 +196,7 @@ h2 {
     color: white;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 .btn:hover {
@@ -225,4 +219,50 @@ h2 {
 
 .menu-item .menu-item-details {
     text-align: left;
+}
+
+.menu-item .btn {
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .menu-item {
+        width: calc(50% - 40px); /* 2 items per row */
+    }
+    .container {
+        padding: 15px;
+        max-width: 100%;
+    }
+    .form-group input,
+    .form-group select {
+        padding: 8px;
+    }
+    .btn {
+        padding: 8px 15px;
+    }
+    .menu-item img {
+        max-width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-item {
+        width: calc(50% - 20px); /* 2 items per row */
+    }
+    .container {
+        padding: 10px;
+        max-width: 100%;
+    }
+    .form-group input,
+    .form-group select {
+        padding: 6px;
+    }
+    .btn {
+        padding: 6px 10px;
+    }
+    .menu-item img {
+        max-width: 60px;
+    }
 }
