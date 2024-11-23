@@ -226,38 +226,3 @@ h2 {
 .menu-item .menu-item-details {
     text-align: left;
 }
-
-/* Responsive design for staff page */
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-        max-width: 100%;
-    }
-    .form-group input,
-    .form-group select {
-        padding: 8px;
-    }
-    .btn {
-        padding: 8px 15px;
-    }
-    .menu-item img {
-        max-width: 80px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-        max-width: 100%;
-    }
-    .form-group input,
-    .form-group select {
-        padding: 6px;
-    }
-    .btn {
-        padding: 6px 10px;
-    }
-    .menu-item img {
-        max-width: 60px;
-    }
-}
