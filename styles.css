@@ -43,6 +43,7 @@ section {
 
 .tabs {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
 }
@@ -57,12 +58,12 @@ section {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.tab-button.active {
+.tab-button:hover {
     background-color: #555;
     color: white;
 }
 
-.tab-button:hover {
+.tab-button.active {
     background-color: #555;
     color: white;
 }
@@ -97,7 +98,7 @@ section {
     border: 1px solid #333;
     margin: 10px;
     padding: 10px;
-    flex: 1 1 100%;
+    flex: 1 1 calc(50% - 40px);
     box-sizing: border-box;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -117,7 +118,7 @@ section {
 .menu-item img {
     width: 100%;
     height: auto;
-    max-width: 150px; /* Adjust the max-width to ensure images are not too large */
+    max-width: 150px;
     margin: 0 auto;
     display: block;
     border-radius: 5px;
@@ -224,7 +225,7 @@ h2 {
 }
 
 .menu-item img {
-    max-width: 150px; /* Adjust the max-width to ensure images are not too large */
+    max-width: 150px;
     height: auto;
     border-radius: 5px;
 }
@@ -241,7 +242,7 @@ h2 {
 /* Responsive design */
 @media (max-width: 768px) {
     .menu-item {
-        flex: 1 1 45%;
+        flex: 1 1 100%;
     }
     .container {
         padding: 15px;
