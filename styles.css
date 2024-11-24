@@ -111,11 +111,15 @@ section {
 
 .image-container {
     position: relative;
+    text-align: center;
 }
 
 .menu-item img {
-    max-width: 40%;
+    width: 100%;
     height: auto;
+    max-width: 150px; /* Adjust the max-width to ensure images are not too large */
+    margin: 0 auto;
+    display: block;
     border-radius: 5px;
 }
 
@@ -137,15 +141,18 @@ section {
 
 .menu-item-details {
     margin-top: 10px;
+    text-align: left;
 }
 
 .menu-item-details h3 {
     margin: 10px 0;
     font-size: 1.2em;
+    text-align: center;
 }
 
 .menu-item-details p {
     margin: 5px 0;
+    text-align: center;
 }
 
 .container {
@@ -217,7 +224,7 @@ h2 {
 }
 
 .menu-item img {
-    max-width: 100px;
+    max-width: 150px; /* Adjust the max-width to ensure images are not too large */
     height: auto;
     border-radius: 5px;
 }
@@ -248,7 +255,7 @@ h2 {
         padding: 8px 15px;
     }
     .menu-item img {
-        max-width: 80px;
+        max-width: 120px;
     }
 }
 
@@ -268,6 +275,6 @@ h2 {
         padding: 6px 10px;
     }
     .menu-item img {
-        max-width: 60px;
+        max-width: 100px;
     }
 }
