@@ -45,10 +45,12 @@ let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
 { name: 'Coke Float', category: 'soft-drinks', price: 25, image: 'coke_float.jpg', description: 'A refreshing combination of Coca-Cola and vanilla ice cream.', outOfStock: false }
 ];
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
     const staffDashboard = document.getElementById('staff-dashboard');
-    const toggleCollapseButton = document.getElementById('toggle-collapse');
+    const tabs = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
 
     const staffCredentials = {
         username: 'staff',
@@ -70,9 +72,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    toggleCollapseButton.addEventListener('click', () => {
-        staffDashboard.classList.toggle('collapsed');
-        toggleCollapseButton.textContent = staffDashboard.classList.contains('collapsed') ? 'Expand' : 'Collapse';
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            tabContents.forEach(tc => tc.classList.remove('active'));
+            document.getElementById(tab.dataset.tab).classList.add('active');
+        });
     });
 
     const addItemButton = document.getElementById('add-item-button');
