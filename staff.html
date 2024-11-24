@@ -36,9 +36,10 @@
             <button class="tab-button active" data-tab="add-item">Add Item</button>
             <button class="tab-button" data-tab="modify-item">Modify Item</button>
             <button class="tab-button" data-tab="make-out-of-stock">Make Out of Stock</button>
+            <button class="tab-button" data-tab="change-log">Change Log</button>
         </div>
 
-        <div id="add-item" class="tab-content">
+        <div id="add-item" class="tab-content active">
             <h3>Add Item</h3>
             <div class="form">
                 <div class="form-group">
@@ -74,18 +75,53 @@
             </div>
         </div>
 
-        <div id="modify-item" class="tab-content" style="display: none;">
+        <div id="modify-item" class="tab-content">
             <h3>Modify Item</h3>
-            <!-- Modify item form/content here -->
+            <div class="form">
+                <div class="form-group">
+                    <label for="modify-item-name">Select Item:</label>
+                    <select id="modify-item-name">
+                        <!-- Items will be dynamically populated here -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modify-item-category">Category:</label>
+                    <select id="modify-item-category">
+                        <option value="coffee">Coffee</option>
+                        <option value="tea">Tea</option>
+                        <option value="soft-drinks">Soft Drinks</option>
+                        <option value="water">Water</option>
+                        <option value="energy-drinks">Energy Drinks</option>
+                        <option value="ice-cream">Ice Cream</option>
+                        <option value="cones">Cones</option>
+                        <option value="short-eats">Short Eats</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modify-item-price">Price:</label>
+                    <input type="number" id="modify-item-price">
+                </div>
+                <div class="form-group">
+                    <label for="modify-item-description">Description:</label>
+                    <input type="text" id="modify-item-description">
+                </div>
+                <div class="form-group">
+                    <label for="modify-item-image">Image:</label>
+                    <input type="file" id="modify-item-image" accept="image/*">
+                </div>
+                <button id="modify-item-button" class="btn">Modify Item</button>
+            </div>
         </div>
 
-        <div id="make-out-of-stock" class="tab-content" style="display: none;">
+        <div id="make-out-of-stock" class="tab-content">
             <h3>Make Out of Stock</h3>
             <div id="staff-menu-items"></div>
         </div>
 
-        <h2>Change Log</h2>
-        <div id="change-log"></div>
+        <div id="change-log" class="tab-content">
+            <h3>Change Log</h3>
+            <div id="change-log-content"></div>
+        </div>
     </section>
 
     <script src="staff.js"></script>
