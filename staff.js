@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.onload = function(e) {
                 const image = e.target.result;
                 menuItems.push({ name, category, price, image, description, outOfStock: false });
+                savePreviousState();
                 updateCustomerMenu();
                 logChange(`Added item: ${name} (by ${staffCredentials.username})`);
                 alert('Item added successfully!');
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     menuItems[itemIndex].image = e.target.result;
+                    savePreviousState();
                     updateCustomerMenu();
                     logChange(`Modified item: ${selectedItemName} (by ${staffCredentials.username})`);
                     alert('Item modified successfully!');
@@ -96,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 reader.readAsDataURL(imageInput.files[0]);
             } else {
+                savePreviousState();
                 updateCustomerMenu();
                 logChange(`Modified item: ${selectedItemName} (by ${staffCredentials.username})`);
                 alert('Item modified successfully!');
@@ -107,10 +110,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const undoButton = document.getElementById('undo-button');
+    undoButton.addEventListener('click', () => {
+        undoChange();
+    });
+
     loadChangeLog();
 });
 
-let menuItems = [ { name: 'Lavazza Black Coffee', category: 'coffee', price: 15, image: 'lavazza_black_coffee.jpg', description: 'A strong and bold espresso base.', outOfStock: false },
+let menuItems = [
+  { name: 'Lavazza Black Coffee', category: 'coffee', price: 15, image: 'lavazza_black_coffee.jpg', description: 'A strong and bold espresso base.', outOfStock: false },
     { name: 'Lavazza Milk Coffee', category: 'coffee', price: 18, image: 'lavazza_milk_coffee.jpg', description: 'Espresso with smooth and creamy milk.', outOfStock: false },
     { name: 'Nescafe Black Coffee', category: 'coffee', price: 5, image: 'nescafe_black_coffee.jpg', description: 'A classic coffee option.', outOfStock: false },
     { name: 'Nescafe Milk Coffee', category: 'coffee', price: 10, image: 'nescafe_milk_coffee.jpg', description: 'A creamy and comforting coffee drink.', outOfStock: false },
@@ -154,7 +163,8 @@ let menuItems = [ { name: 'Lavazza Black Coffee', category: 'coffee', price: 15,
     { name: 'Pudding Caramel', category: 'short-eats', price: 12, image: 'pudding_caramel.jpg', description: 'A creamy caramel pudding.', outOfStock: false },
     { name: 'Boiled Egg', category: 'short-eats', price: 5, image: 'boiled_egg.jpg', description: 'A simple and nutritious boiled egg.', outOfStock: false },
 { name: 'Coke Float', category: 'soft-drinks', price: 25, image: 'coke_float.jpg', description: 'A refreshing combination of Coca-Cola and vanilla ice cream.', outOfStock: false }
- ];
+];
+let previousState = null;
 
 function updateCustomerMenu() {
     localStorage.setItem('menuItems', JSON.stringify(menuItems));
@@ -220,42 +230,47 @@ function loadModifyItems() {
     });
 }
 
-function loadOutOfStockItems(category) {
-    const menuContainer = document.getElementById('staff-menu-items');
-    menuContainer.innerHTML = '';
-    const filteredItems = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
-    filteredItems.forEach((item, index) => {
-        const menuItem = document.createElement('div');
-        menuItem.classList.add('menu-item');
-        menuItem.innerHTML = `
-            <div class="image-container">
-                <img src="${item.image}" alt="${item.name}">
-                ${item.outOfStock ? '<div class="out-of-stock-overlay">Out of Stock</div>' : ''}
-            </div>
-            <div class="menu-item-details">
-                <h3>${item.name}</h3>
-                <p>${item.description}</p>
-                <p>Price: MVR ${item.price}</p>
-                <button class="btn" onclick="markOutOfStock(${index})">${item.outOfStock ? 'In Stock' : 'Out of Stock'}</button>
-                <button class="btn" onclick="deleteItem(${index})">Delete</button>
-            </div>
-        `;
-        menuContainer.appendChild(menuItem);
-    });
-}
-
 function markOutOfStock(index) {
     menuItems[index].outOfStock = !menuItems[index].outOfStock;
+    savePreviousState();
     updateCustomerMenu();
     logChange(`Marked item "${menuItems[index].name}" as ${menuItems[index].outOfStock ? 'Out of Stock' : 'In Stock'} (by staff)`);
-    loadOutOfStockItems(document.getElementById('out-of-stock-category').value);
+    loadMenuItems();
 }
 
 function deleteItem(index) {
     const itemName = menuItems[index].name;
+    savePreviousState();
     menuItems.splice(index, 1);
     updateCustomerMenu();
     logChange(`Deleted item: ${itemName} (by staff)`);
-    loadOutOfStockItems(document.getElementById('out-of-stock-category').value);
+    loadMenuItems();
 }
-l
+
+function savePreviousState() {
+    previousState = JSON.parse(JSON.stringify(menuItems));
+    localStorage.setItem('previousState', JSON.stringify(previousState));
+    const currentTime = new Date().toISOString();
+    localStorage.setItem('previousStateTimestamp', currentTime);
+}
+
+function undoChange() {
+    const previousStateJSON = localStorage.getItem('previousState');
+    const previousStateTimestamp = localStorage.getItem('previousStateTimestamp');
+    if (previousStateJSON && previousStateTimestamp) {
+        const oneDayAgo = new Date(new Date().getTime() - 24 * 60 * 60 * 1000);
+        if (new Date(previousStateTimestamp) > oneDayAgo) {
+            menuItems = JSON.parse(previousStateJSON);
+            updateCustomerMenu();
+            alert('Undo successful!');
+            loadMenuItems();
+            loadModifyItems();
+            localStorage.removeItem('previousState');
+            localStorage.removeItem('previousStateTimestamp');
+        } else {
+            alert('Undo not possible. The previous state is more than one day old.');
+        }
+    } else {
+        alert('No previous state found to undo.');
+    }
+}
