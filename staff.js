@@ -43,8 +43,7 @@ let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [
     { name: 'Pudding Caramel', category: 'short-eats', price: 12, image: 'pudding_caramel.jpg', description: 'A creamy caramel pudding.', outOfStock: false },
     { name: 'Boiled Egg', category: 'short-eats', price: 5, image: 'boiled_egg.jpg', description: 'A simple and nutritious boiled egg.', outOfStock: false },
 { name: 'Coke Float', category: 'soft-drinks', price: 25, image: 'coke_float.jpg', description: 'A refreshing combination of Coca-Cola and vanilla ice cream.', outOfStock: false }
-];
-
+]; 
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -66,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             loginForm.style.display = 'none';
             staffDashboard.style.display = 'block';
             loadMenuItems();
+            loadModifyItems();
             loadChangeLog();
         } else {
             alert('Invalid username or password');
@@ -103,10 +103,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 logChange(`Added item: ${name} (by ${staffCredentials.username})`);
                 alert('Item added successfully!');
                 loadMenuItems();
+                loadModifyItems();
             };
             reader.readAsDataURL(imageInput.files[0]);
         } else {
             alert('Please upload an image for the item.');
+        }
+    });
+
+    const modifyItemButton = document.getElementById('modify-item-button');
+    modifyItemButton.addEventListener('click', () => {
+        const selectedItemName = document.getElementById('modify-item-name').value;
+        const category = document.getElementById('modify-item-category').value;
+        const price = document.getElementById('modify-item-price').value;
+        const description = document.getElementById('modify-item-description').value;
+        const imageInput = document.getElementById('modify-item-image');
+
+        const itemIndex = menuItems.findIndex(item => item.name === selectedItemName);
+        if (itemIndex !== -1) {
+            menuItems[itemIndex].category = category;
+            menuItems[itemIndex].price = price;
+            menuItems[itemIndex].description = description;
+
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    menuItems[itemIndex].image = e.target.result;
+                    updateCustomerMenu();
+                    logChange(`Modified item: ${selectedItemName} (by ${staffCredentials.username})`);
+                    alert('Item modified successfully!');
+                    loadMenuItems();
+                    loadModifyItems();
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                updateCustomerMenu();
+                logChange(`Modified item: ${selectedItemName} (by ${staffCredentials.username})`);
+                alert('Item modified successfully!');
+                loadMenuItems();
+                loadModifyItems();
+            }
+        } else {
+            alert('Item not found.');
         }
     });
 
@@ -134,7 +172,7 @@ function loadChangeLog() {
 
 function displayChangeLog() {
     const changeLog = JSON.parse(localStorage.getItem('changeLog')) || [];
-    const changeLogContainer = document.getElementById('change-log');
+    const changeLogContainer = document.getElementById('change-log-content');
     changeLogContainer.innerHTML = '';
     changeLog.forEach(entry => {
         const logEntry = document.createElement('div');
@@ -163,6 +201,17 @@ function loadMenuItems() {
             </div>
         `;
         menuContainer.appendChild(menuItem);
+    });
+}
+
+function loadModifyItems() {
+    const modifyItemSelect = document.getElementById('modify-item-name');
+    modifyItemSelect.innerHTML = '';
+    menuItems.forEach(item => {
+        const option = document.createElement('option');
+        option.value = item.name;
+        option.textContent = item.name;
+        modifyItemSelect.appendChild(option);
     });
 }
 
