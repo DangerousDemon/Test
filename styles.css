@@ -43,7 +43,6 @@ section {
 
 .tabs {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 20px;
 }
@@ -58,9 +57,22 @@ section {
     transition: background-color 0.3s, color 0.3s;
 }
 
+.tab-button.active {
+    background-color: #555;
+    color: white;
+}
+
 .tab-button:hover {
     background-color: #555;
     color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
 }
 
 #search-bar {
@@ -217,14 +229,6 @@ h2 {
 .menu-item .btn {
     margin-right: 5px;
     margin-top: 10px;
-}
-
-.collapsed #form-section {
-    display: none;
-}
-
-.collapsed #toggle-collapse::after {
-    content: 'Expand';
 }
 
 /* Responsive design */
